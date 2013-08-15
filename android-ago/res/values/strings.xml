@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="app_name">relative-time-textview</string>
+	<string name="just_now">Just Now</string>
+</resources>
