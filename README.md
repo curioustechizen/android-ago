@@ -1,7 +1,7 @@
 android-ago
 ==========
 
-This library provides `RelativeTimeTextView`, a custom `TextView` that takes a reference time and always displays the relative time with respect to the reference point. This is a common pattern seen in several apps like chat apps, social networking, email etc.
+This library provides `RelativeTimeTextView`, a custom `TextView` that takes a reference time and always displays the relative time with respect to the reference point, **automatically refreshing the display text as needed**. This is a common pattern seen in several apps like chat apps, social networking, email etc.
 
 ![Here is a screenshot from the sample app][1]
 
