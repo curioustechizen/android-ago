@@ -25,6 +25,8 @@ public class DummyContent {
 		DUMMY_ITEMS.add(new RowItem("Another message", NOW - (15 * 60 * 1000)));
 		DUMMY_ITEMS.add(new RowItem("Not-so-recent message", NOW - (24 * 60 * 60 * 1000)));
 		DUMMY_ITEMS.add(new RowItem("Very old message", NOW - (8 * 24 * 60 * 60 * 1000)));
+		DUMMY_ITEMS.add(new RowItem("Near future message", NOW + (4 * 60 * 1000)));
+		DUMMY_ITEMS.add(new RowItem("Another future message", NOW + (25 * 60 * 60 * 1000)));
 	}
 
 }
