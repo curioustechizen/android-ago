@@ -25,7 +25,7 @@ public class RelativeTimeTextView extends TextView {
     private String mText;
     private Handler mHandler = new Handler();
 
-    private Runnable mUpdateTimeTask = new Runnable() {
+    /*private Runnable mUpdateTimeTask = new Runnable() {
         public void run() {
             long difference = Math.abs(System.currentTimeMillis() - mReferenceTime);
             long interval = DateUtils.MINUTE_IN_MILLIS;
@@ -39,7 +39,9 @@ public class RelativeTimeTextView extends TextView {
             updateTextDisplay();
             mHandler.postDelayed(this, interval);
         }
-    };
+    };*/
+    
+    private UpdateTimeRunnable mUpdateTimeTask;
 
     public RelativeTimeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,6 +65,9 @@ public class RelativeTimeTextView extends TextView {
         try {
             mReferenceTime = Long.valueOf(mText);
         } catch (NumberFormatException nfe) {
+        	/*
+        	 * TODO: Better exception handling
+        	 */
             mReferenceTime = -1L;
         }
 
@@ -76,12 +81,32 @@ public class RelativeTimeTextView extends TextView {
      */
     public void setReferenceTime(long referenceTime) {
         this.mReferenceTime = referenceTime;
+        
+        /*
+         * Note that this method could be called when a row in a ListView is recycled.
+         * Hence, we need to first stop any currently running schedules (for example from the recycled view.
+         */
+        stopTaskForPeriodicallyUpdatingRelativeTime();
+        
+        /*
+         * Instantiate a new runnable with the new reference time
+         */
+        mUpdateTimeTask = new UpdateTimeRunnable(mReferenceTime);
+        
+        /*
+         * Start a new schedule.
+         */
+        startTaskForPeriodicallyUpdatingRelativeTime();
+        
+        /*
+         * Finally, update the text display.
+         */
         updateTextDisplay();
     }
 
     private void updateTextDisplay() {
         /*
-         * TODO: Perform validation
+         * TODO: Validation, Better handling of negative cases
          */
         if (this.mReferenceTime == -1L)
             return;
@@ -179,5 +204,31 @@ public class RelativeTimeTextView extends TextView {
             super(in);
             referenceTime = in.readLong();
         }
+    }
+    
+    private class UpdateTimeRunnable implements Runnable{
+
+    	private long mRefTime;
+    	
+    	UpdateTimeRunnable(long refTime){
+    		this.mRefTime = refTime;
+    	}
+    	
+		@Override
+		public void run() {
+			long difference = Math.abs(System.currentTimeMillis() - mRefTime);
+            long interval = DateUtils.MINUTE_IN_MILLIS;
+            if (difference > DateUtils.WEEK_IN_MILLIS) {
+                interval = DateUtils.WEEK_IN_MILLIS;
+            } else if (difference > DateUtils.DAY_IN_MILLIS) {
+                interval = DateUtils.DAY_IN_MILLIS;
+            } else if (difference > DateUtils.HOUR_IN_MILLIS) {
+                interval = DateUtils.HOUR_IN_MILLIS;
+            }
+            updateTextDisplay();
+            mHandler.postDelayed(this, interval);
+			
+		}
+    	
     }
 }
