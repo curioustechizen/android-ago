@@ -23,6 +23,8 @@ public class RelativeTimeTextView extends TextView {
 
     private long mReferenceTime;
     private String mText;
+    private String mPrefix;
+    private String mSuffix;
     private Handler mHandler = new Handler();
 
     /*private Runnable mUpdateTimeTask = new Runnable() {
@@ -58,6 +60,11 @@ public class RelativeTimeTextView extends TextView {
                 R.styleable.RelativeTimeTextView, 0, 0);
         try {
             mText = a.getString(R.styleable.RelativeTimeTextView_reference_time);
+            mPrefix = a.getString(R.styleable.RelativeTimeTextView_relative_time_prefix);
+            mSuffix = a.getString(R.styleable.RelativeTimeTextView_relative_time_suffix);
+
+            mPrefix = mPrefix == null ? "" : mPrefix;
+            mSuffix = mSuffix == null ? "" : mSuffix;
         } finally {
             a.recycle();
         }
@@ -71,6 +78,47 @@ public class RelativeTimeTextView extends TextView {
             mReferenceTime = -1L;
         }
 
+
+    }
+
+    /**
+     * Returns prefix
+     * @return
+     */
+    public String getPrefix() {
+        return this.mPrefix;
+    }
+
+    /**
+     * String to be attached before the reference time
+     * @param prefix
+     *
+     * Example:
+     * [prefix] in XX minutes
+     */
+    public void setPrefix(String prefix) {
+        this.mPrefix = prefix;
+        updateTextDisplay();
+    }
+
+    /**
+     * Returns suffix
+     * @return
+     */
+    public String getSuffix() {
+        return this.mSuffix;
+    }
+
+    /**
+     * String to be attached after the reference time
+     * @param suffix
+     *
+     * Example:
+     * in XX minutes [suffix]
+     */
+    public void setSuffix(String suffix) {
+        this.mSuffix = suffix;
+        updateTextDisplay();
     }
 
     /**
@@ -110,7 +158,7 @@ public class RelativeTimeTextView extends TextView {
          */
         if (this.mReferenceTime == -1L)
             return;
-        setText(getRelativeTimeDisplayString());
+        setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
     }
 
     private CharSequence getRelativeTimeDisplayString() {
