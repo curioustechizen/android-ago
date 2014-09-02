@@ -11,7 +11,9 @@ This library can be seen as a wrapper on top of the excellent `android.text.form
 Why is this library even needed?
 ======
 
-One might ask, why not just use `DateUtils` directly? Well, the answer is that the custom `TextView` provided by this library is responsible for keeping track of its own reference time and of updating the display text over regular periodic intervals. It is also responsible for scheduling (or cancelling a scheduled) update of the display text. All you have to do is include `RelativeTimeTextView` in your layouts, and set its reference time, either using `setReferenceTime(long)` or with the XML attribute `reference_time`. See the sample project for a concrete example. You can also add prefixes and suffixes to the relative time. To add a prefix, you can use the `setPrefix(String)` method or the XML attribute `relative_time_prefix`. Whereas, for a suffix you would use `setSuffix(String)` or the XML attribute `relative_time_suffix`. Prefixes and suffixes only apply to the "relative time", they won't apply if you set the text via `setText(String)`.
+One might ask, why not just use `DateUtils` directly? Well, the answer is that the custom `TextView` provided by this library is responsible for keeping track of its own reference time and of updating the display text over regular periodic intervals. It is also responsible for scheduling (or cancelling a scheduled) update of the display text. All you have to do is include `RelativeTimeTextView` in your layouts, and set its reference time, either using `setReferenceTime(long)` or with the XML attribute `reference_time`. See the sample project for a concrete example.
+
+You can also add prefixes and suffixes to the relative time. To add a prefix, you can use the `setPrefix(String)` method or the XML attribute `relative_time_prefix`. Whereas, for a suffix you would use `setSuffix(String)` or the XML attribute `relative_time_suffix`. Prefixes and suffixes only apply to the "relative time", they won't apply if you set the text via `setText(String)`.
 
 
 
