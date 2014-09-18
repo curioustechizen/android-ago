@@ -8,6 +8,22 @@ This library provides `RelativeTimeTextView`, a custom `TextView` that takes a r
 This library can be seen as a wrapper on top of the excellent `android.text.format.DateUtils` class. Note that the library does _not_ expose all the options provided by the `DateUtils` class. I have left out many features because I couldn't decide what would be the best way to achieve the flexibility - dozens of XML attributes? Contributions in this regard are welcome.
 
 
+Obtaining
+=========
+
+###Android Studio
+  1. Clone the repo
+  2. Open build.gradle in the root folder of the cloned project in Android Studio
+
+###Eclipse+ADT
+  1. Clone the repo
+  2. In Eclipse, go to `File` -> `New` -> `Other`. Expand `Android` and select `Android Project from Existing Code`
+  3. Browse to the `android-ago` sub-folder of the cloned repo and hit `Finish`
+
+###Maven Central
+This project is not available on Maven Central yet. Please follow #3 to know when this is done.
+
+
 Usage
 =====
 
