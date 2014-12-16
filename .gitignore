@@ -23,3 +23,7 @@ local.properties
 # gradle directory
 .gradle
 build/
+
+IntelliJ IDE specific files
+*.iml
+.idea/
