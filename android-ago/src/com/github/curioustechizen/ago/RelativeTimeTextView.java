@@ -45,6 +45,11 @@ public class RelativeTimeTextView extends TextView {
     
     private UpdateTimeRunnable mUpdateTimeTask;
 
+    public RelativeTimeTextView(Context context) {
+        super(context);
+        init(context, null);
+    }
+
     public RelativeTimeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
@@ -77,8 +82,6 @@ public class RelativeTimeTextView extends TextView {
         	 */
             mReferenceTime = -1L;
         }
-
-
     }
 
     /**
@@ -140,7 +143,7 @@ public class RelativeTimeTextView extends TextView {
          * Instantiate a new runnable with the new reference time
          */
         mUpdateTimeTask = new UpdateTimeRunnable(mReferenceTime);
-        
+
         /*
          * Start a new schedule.
          */
@@ -197,11 +200,11 @@ public class RelativeTimeTextView extends TextView {
     }
 
     private void startTaskForPeriodicallyUpdatingRelativeTime() {
-        mHandler.post(mUpdateTimeTask);
+        if (mUpdateTimeTask != null) mHandler.post(mUpdateTimeTask);
     }
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
-        mHandler.removeCallbacks(mUpdateTimeTask);
+        if (mUpdateTimeTask != null) mHandler.removeCallbacks(mUpdateTimeTask);
     }
 
     @Override
