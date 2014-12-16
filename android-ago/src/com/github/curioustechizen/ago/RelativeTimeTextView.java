@@ -26,24 +26,8 @@ public class RelativeTimeTextView extends TextView {
     private String mPrefix;
     private String mSuffix;
     private Handler mHandler = new Handler();
-
-    /*private Runnable mUpdateTimeTask = new Runnable() {
-        public void run() {
-            long difference = Math.abs(System.currentTimeMillis() - mReferenceTime);
-            long interval = DateUtils.MINUTE_IN_MILLIS;
-            if (difference > DateUtils.WEEK_IN_MILLIS) {
-                interval = DateUtils.WEEK_IN_MILLIS;
-            } else if (difference > DateUtils.DAY_IN_MILLIS) {
-                interval = DateUtils.DAY_IN_MILLIS;
-            } else if (difference > DateUtils.HOUR_IN_MILLIS) {
-                interval = DateUtils.HOUR_IN_MILLIS;
-            }
-            updateTextDisplay();
-            mHandler.postDelayed(this, interval);
-        }
-    };*/
-    
     private UpdateTimeRunnable mUpdateTimeTask;
+    private boolean isUpdateTaskRunning = false;
 
     public RelativeTimeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -199,10 +183,14 @@ public class RelativeTimeTextView extends TextView {
 
     private void startTaskForPeriodicallyUpdatingRelativeTime() {
         mHandler.post(mUpdateTimeTask);
+        isUpdateTaskRunning = true;
     }
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
-        mHandler.removeCallbacks(mUpdateTimeTask);
+        if(isUpdateTaskRunning) {
+            mHandler.removeCallbacks(mUpdateTimeTask);
+            isUpdateTaskRunning = false;
+        }
     }
 
     @Override
