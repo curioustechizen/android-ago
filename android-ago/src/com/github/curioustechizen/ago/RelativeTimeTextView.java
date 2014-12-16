@@ -78,6 +78,7 @@ public class RelativeTimeTextView extends TextView {
             mReferenceTime = -1L;
         }
 
+        setReferenceTime(mReferenceTime);
 
     }
 
