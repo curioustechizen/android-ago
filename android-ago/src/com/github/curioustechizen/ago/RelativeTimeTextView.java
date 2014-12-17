@@ -25,7 +25,7 @@ public class RelativeTimeTextView extends TextView {
     private String mText;
     private String mPrefix;
     private String mSuffix;
-    private Handler mHandler = new Handler();
+    private Handler mMyHandler;
     private UpdateTimeRunnable mUpdateTimeTask;
     private boolean isUpdateTaskRunning = false;
 
@@ -182,13 +182,13 @@ public class RelativeTimeTextView extends TextView {
     }
 
     private void startTaskForPeriodicallyUpdatingRelativeTime() {
-        mHandler.post(mUpdateTimeTask);
+        getMyHandler().post(mUpdateTimeTask);
         isUpdateTaskRunning = true;
     }
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
         if(isUpdateTaskRunning) {
-            mHandler.removeCallbacks(mUpdateTimeTask);
+            getMyHandler().removeCallbacks(mUpdateTimeTask);
             isUpdateTaskRunning = false;
         }
     }
@@ -263,9 +263,14 @@ public class RelativeTimeTextView extends TextView {
                 interval = DateUtils.HOUR_IN_MILLIS;
             }
             updateTextDisplay();
-            mHandler.postDelayed(this, interval);
+            getMyHandler().postDelayed(this, interval);
 			
 		}
     	
+    }
+
+    private Handler getMyHandler() {
+        if (mMyHandler == null) mMyHandler = new Handler();
+        return mMyHandler;
     }
 }
