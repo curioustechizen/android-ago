@@ -1,3 +1,7 @@
+repositories{
+    mavenCentral()
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -18,5 +22,6 @@ android {
 }
 
 dependencies {
-    compile project(":android-ago")
+    //compile project(":android-ago")
+    compile 'com.github.curioustechizen.android-ago:library:1.2.0'
 }

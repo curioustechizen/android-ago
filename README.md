@@ -11,18 +11,19 @@ This library can be seen as a wrapper on top of the excellent `android.text.form
 Obtaining
 =========
 
-###Android Studio
-  1. Clone the repo
-  2. Open build.gradle in the root folder of the cloned project in Android Studio
+###Gradle
+
+Add the following to your build.gradle
+
+    dependencies {
+        compile 'com.github.curioustechizen.android-ago:library:1.2.0'
+    }
+
 
 ###Eclipse+ADT
   1. Clone the repo
   2. In Eclipse, go to `File` -> `New` -> `Other`. Expand `Android` and select `Android Project from Existing Code`
   3. Browse to the `android-ago` sub-folder of the cloned repo and hit `Finish`
-
-###Maven Central
-This project is not available on Maven Central yet. Please follow #3 to know when this is done.
-
 
 Usage
 =====
