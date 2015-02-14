@@ -5,11 +5,11 @@ repositories{
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 21
     buildToolsVersion "21.1.2"
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 17
+        minSdkVersion 8
+        targetSdkVersion 21
     }
     sourceSets {
         main {
@@ -22,6 +22,5 @@ android {
 }
 
 dependencies {
-    //compile project(":android-ago")
-    compile 'com.github.curioustechizen.android-ago:library:1.2.0'
+    compile 'com.github.curioustechizen.android-ago:library:1.3.0'
 }

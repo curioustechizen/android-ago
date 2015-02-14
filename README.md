@@ -64,10 +64,18 @@ Who's Using this Library?
 See [here](https://github.com/curioustechizen/android-ago/wiki/Apps-using-android-ago). If you would like to add your app to this list, please edit the wiki.
 
 
+Android version support statement
+========
+
+The library has been tested on API 11 and above. However, theoretically, it works on API 3 and above since all it uses is [DateUtils#getRelativeTimeSpanString](http://developer.android.com/reference/android/text/format/DateUtils.html#getRelativeTimeSpanString(long, long, long, int)).
+
+The minSdkVersion has been set to 8, however do not expect support from me for API version < 11.
+
+
 ###License
 
  
-	Copyright 2013 Kiran Rao
+	Copyright 2015 Kiran Rao
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
