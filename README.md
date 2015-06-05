@@ -16,7 +16,7 @@ Obtaining
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.curioustechizen.android-ago:library:1.2.0'
+        compile 'com.github.curioustechizen.android-ago:library:1.3.0'
     }
 
 
