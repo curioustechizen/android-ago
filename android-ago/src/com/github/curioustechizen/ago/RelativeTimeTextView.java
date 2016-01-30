@@ -1,4 +1,3 @@
-
 package com.github.curioustechizen.ago;
 
 import android.content.Context;
@@ -25,7 +24,7 @@ public class RelativeTimeTextView extends TextView {
     private String mText;
     private String mPrefix;
     private String mSuffix;
-    private Handler mHandler = new Handler();
+    private Handler mMyHandler;
     private UpdateTimeRunnable mUpdateTimeTask;
     private boolean isUpdateTaskRunning = false;
 
@@ -56,9 +55,9 @@ public class RelativeTimeTextView extends TextView {
         try {
             mReferenceTime = Long.valueOf(mText);
         } catch (NumberFormatException nfe) {
-        	/*
-        	 * TODO: Better exception handling
-        	 */
+            /*
+             * TODO: Better exception handling
+             */
             mReferenceTime = -1L;
         }
 
@@ -114,23 +113,23 @@ public class RelativeTimeTextView extends TextView {
      */
     public void setReferenceTime(long referenceTime) {
         this.mReferenceTime = referenceTime;
-        
+
         /*
          * Note that this method could be called when a row in a ListView is recycled.
          * Hence, we need to first stop any currently running schedules (for example from the recycled view.
          */
         stopTaskForPeriodicallyUpdatingRelativeTime();
-        
+
         /*
          * Instantiate a new runnable with the new reference time
          */
         mUpdateTimeTask = new UpdateTimeRunnable(mReferenceTime);
-        
+
         /*
          * Start a new schedule.
          */
         startTaskForPeriodicallyUpdatingRelativeTime();
-        
+
         /*
          * Finally, update the text display.
          */
@@ -141,21 +140,20 @@ public class RelativeTimeTextView extends TextView {
         /*
          * TODO: Validation, Better handling of negative cases
          */
-        if (this.mReferenceTime == -1L)
-            return;
+        if (this.mReferenceTime == -1L) return;
         setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
     }
 
     private CharSequence getRelativeTimeDisplayString() {
         long now = System.currentTimeMillis();
-        long difference = now - mReferenceTime; 
-        return (difference >= 0 &&  difference<=DateUtils.MINUTE_IN_MILLIS) ? 
-                getResources().getString(R.string.just_now): 
-                DateUtils.getRelativeTimeSpanString(
-                    mReferenceTime,
-                    now,
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE);
+        long difference = now - mReferenceTime;
+        return (difference >= 0 && difference<=DateUtils.MINUTE_IN_MILLIS)
+                ? getResources().getString(R.string.just_now)
+                : DateUtils.getRelativeTimeSpanString(
+                        mReferenceTime,
+                        now,
+                        DateUtils.MINUTE_IN_MILLIS,
+                        DateUtils.FORMAT_ABBREV_RELATIVE);
     }
 
     @Override
@@ -182,13 +180,13 @@ public class RelativeTimeTextView extends TextView {
     }
 
     private void startTaskForPeriodicallyUpdatingRelativeTime() {
-        mHandler.post(mUpdateTimeTask);
+        getMyHandler().post(mUpdateTimeTask);
         isUpdateTaskRunning = true;
     }
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
-        if(isUpdateTaskRunning) {
-            mHandler.removeCallbacks(mUpdateTimeTask);
+        if (isUpdateTaskRunning) {
+            getMyHandler().removeCallbacks(mUpdateTimeTask);
             isUpdateTaskRunning = false;
         }
     }
@@ -200,7 +198,7 @@ public class RelativeTimeTextView extends TextView {
         ss.referenceTime = mReferenceTime;
         return ss;
     }
-    
+
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         if (!(state instanceof SavedState)) {
@@ -236,24 +234,24 @@ public class RelativeTimeTextView extends TextView {
                 return new SavedState[size];
             }
         };
-        
+
         private SavedState(Parcel in) {
             super(in);
             referenceTime = in.readLong();
         }
     }
-    
-    private class UpdateTimeRunnable implements Runnable{
 
-    	private long mRefTime;
-    	
-    	UpdateTimeRunnable(long refTime){
-    		this.mRefTime = refTime;
-    	}
-    	
-		@Override
-		public void run() {
-			long difference = Math.abs(System.currentTimeMillis() - mRefTime);
+    private class UpdateTimeRunnable implements Runnable {
+
+        private long mRefTime;
+
+        UpdateTimeRunnable(long refTime) {
+            this.mRefTime = refTime;
+        }
+
+        @Override
+        public void run() {
+            long difference = Math.abs(System.currentTimeMillis() - mRefTime);
             long interval = DateUtils.MINUTE_IN_MILLIS;
             if (difference > DateUtils.WEEK_IN_MILLIS) {
                 interval = DateUtils.WEEK_IN_MILLIS;
@@ -263,9 +261,12 @@ public class RelativeTimeTextView extends TextView {
                 interval = DateUtils.HOUR_IN_MILLIS;
             }
             updateTextDisplay();
-            mHandler.postDelayed(this, interval);
-			
-		}
-    	
+            getMyHandler().postDelayed(this, interval);
+        }
+    }
+
+    private Handler getMyHandler() {
+        if (mMyHandler == null) mMyHandler = new Handler();
+        return mMyHandler;
     }
 }
