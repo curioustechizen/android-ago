@@ -21,6 +21,8 @@ import com.github.curioustechizen.ago.R;
  */
 public class RelativeTimeTextView extends TextView {
 
+    private static final long INITIAL_UPDATE_INTERVAL = DateUtils.SECOND_IN_MILLIS * 5;
+
     private long mReferenceTime;
     private String mText;
     private String mPrefix;
@@ -254,7 +256,7 @@ public class RelativeTimeTextView extends TextView {
 		@Override
 		public void run() {
 			long difference = Math.abs(System.currentTimeMillis() - mRefTime);
-            long interval = DateUtils.MINUTE_IN_MILLIS;
+            long interval = INITIAL_UPDATE_INTERVAL;
             if (difference > DateUtils.WEEK_IN_MILLIS) {
                 interval = DateUtils.WEEK_IN_MILLIS;
             } else if (difference > DateUtils.DAY_IN_MILLIS) {

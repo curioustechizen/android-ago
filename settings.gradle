@@ -1,2 +1,1 @@
-include ':android-ago'
-include ':android-ago-sample'
+include ':android-ago', ':android-ago-sample', ':android-ago-sample-databinding'
