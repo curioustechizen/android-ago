@@ -6,11 +6,11 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import com.github.curioustechizen.ago.R;
 
 
 /**
@@ -143,7 +143,7 @@ public class RelativeTimeTextView extends TextView {
          */
         if (this.mReferenceTime == -1L)
             return;
-        setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
+        setText(Html.fromHtml(mPrefix + getRelativeTimeDisplayString() + mSuffix));
     }
 
     private CharSequence getRelativeTimeDisplayString() {
