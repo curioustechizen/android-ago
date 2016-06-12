@@ -9,6 +9,7 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name=".AgoSampleApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
