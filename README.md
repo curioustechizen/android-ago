@@ -17,7 +17,6 @@ Add repo to your build.gradle
 
     allprojects {
     	repositories {
-    		...
     		maven { url "https://jitpack.io" }
     	}
     }
@@ -25,7 +24,7 @@ Add repo to your build.gradle
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.pwiniars.android-ago:library:<LATEST_VERSION>'
+        compile 'com.github.pwiniars.android-ago:android-ago:1.4.0'
     }
 
 
