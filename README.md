@@ -16,7 +16,7 @@ Obtaining
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.curioustechizen.android-ago:library:1.3.0'
+        compile 'com.github.curioustechizen.android-ago:library:<LATEST_VERSION>'
     }
 
 
@@ -72,10 +72,16 @@ The library has been tested on API 11 and above. However, theoretically, it work
 The minSdkVersion has been set to 8, however do not expect support from me for API version < 11.
 
 
+Usage with Data Binding
+========
+
+See `android-ago-sample-databinding` for an example of how to use this library with the Android data binding library. Thanks to @Dev-IL for providing this sample.
+
+
 ###License
 
  
-	Copyright 2015 Kiran Rao
+	Copyright 2016 Kiran Rao
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.

@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 
 /**
  * A {@code TextView} that, given a reference time, renders that time as a time period relative to the current time.
@@ -20,6 +22,8 @@ import android.widget.TextView;
  *
  */
 public class RelativeTimeTextView extends TextView {
+
+    private static final long INITIAL_UPDATE_INTERVAL = DateUtils.MINUTE_IN_MILLIS;
 
     private long mReferenceTime;
     private String mText;
@@ -124,7 +128,7 @@ public class RelativeTimeTextView extends TextView {
         /*
          * Instantiate a new runnable with the new reference time
          */
-        mUpdateTimeTask = new UpdateTimeRunnable(mReferenceTime);
+        mUpdateTimeTask = new UpdateTimeRunnable(this, mReferenceTime);
         
         /*
          * Start a new schedule.
@@ -188,6 +192,7 @@ public class RelativeTimeTextView extends TextView {
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
         if(isUpdateTaskRunning) {
+            mUpdateTimeTask.detach();
             mHandler.removeCallbacks(mUpdateTimeTask);
             isUpdateTaskRunning = false;
         }
@@ -243,18 +248,26 @@ public class RelativeTimeTextView extends TextView {
         }
     }
     
-    private class UpdateTimeRunnable implements Runnable{
+    private static class UpdateTimeRunnable implements Runnable{
 
     	private long mRefTime;
+        private final WeakReference<RelativeTimeTextView>  weakRefRttv;
     	
-    	UpdateTimeRunnable(long refTime){
+    	UpdateTimeRunnable(RelativeTimeTextView rttv, long refTime){
     		this.mRefTime = refTime;
-    	}
-    	
+            weakRefRttv = new WeakReference<>(rttv);
+        }
+
+        void detach() {
+            weakRefRttv.clear();
+        }
+
 		@Override
 		public void run() {
+            RelativeTimeTextView rttv = weakRefRttv.get();
+            if(rttv == null)   return;
 			long difference = Math.abs(System.currentTimeMillis() - mRefTime);
-            long interval = DateUtils.MINUTE_IN_MILLIS;
+            long interval = INITIAL_UPDATE_INTERVAL;
             if (difference > DateUtils.WEEK_IN_MILLIS) {
                 interval = DateUtils.WEEK_IN_MILLIS;
             } else if (difference > DateUtils.DAY_IN_MILLIS) {
@@ -262,10 +275,9 @@ public class RelativeTimeTextView extends TextView {
             } else if (difference > DateUtils.HOUR_IN_MILLIS) {
                 interval = DateUtils.HOUR_IN_MILLIS;
             }
-            updateTextDisplay();
-            mHandler.postDelayed(this, interval);
+            rttv.updateTextDisplay();
+            rttv.mHandler.postDelayed(this, interval);
 			
 		}
-    	
     }
 }

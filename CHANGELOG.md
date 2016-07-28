@@ -1,3 +1,17 @@
+v1.3.2 [Jun 12, 2016]
+========
+
+  - [BUGFIX]: Fixed memory leak in `RelativeTimeTextView`
+  - [TRANSLATIONS]: French, Portuguese
+
+
+
+v1.3.1 [May 15, 2016]
+========
+
+  - [TRANSLATIONS]: Hebrew, Russian, Chinese, Slovak, German
+
+
 v1.3.0 [Feb 14, 2014]
 ========
 
