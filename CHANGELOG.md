@@ -1,3 +1,11 @@
+v1.4.0 [Jul 28, 2016]
+========
+
+  - Sync with base project changes up till now
+  - Ability to disable/enable Html tags support (disabled by default)
+  - Android N ready
+
+
 v1.3.2 [Jun 12, 2016]
 ========
 
