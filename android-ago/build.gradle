@@ -5,8 +5,8 @@ android {
     buildToolsVersion "24.0.0"
     defaultConfig {
         minSdkVersion 8
-        versionCode 10400
-        versionName "1.4.0"
+        versionCode 10401
+        versionName "1.4.1"
         targetSdkVersion 24
 
     }
@@ -20,3 +20,5 @@ android {
 }
 
 //apply from: 'maven-publish.gradle'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.pwiniars'
