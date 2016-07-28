@@ -24,7 +24,7 @@ Add repo to your build.gradle
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.pwiniars.android-ago:android-ago:1.4.0'
+        compile 'com.github.pwiniars.android-ago:android-ago:1.0.0'
     }
 
 
