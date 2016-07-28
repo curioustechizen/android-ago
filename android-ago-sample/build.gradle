@@ -3,6 +3,8 @@ repositories{
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.pwiniars'
 
 android {
     compileSdkVersion 21
