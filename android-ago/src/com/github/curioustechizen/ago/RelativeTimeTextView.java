@@ -6,7 +6,6 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -32,6 +31,7 @@ public class RelativeTimeTextView extends TextView {
     private Handler mHandler = new Handler();
     private UpdateTimeRunnable mUpdateTimeTask;
     private boolean isUpdateTaskRunning = false;
+    private boolean isHtmlTagsEnabled = false;
 
     public RelativeTimeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,6 +50,7 @@ public class RelativeTimeTextView extends TextView {
             mText = a.getString(R.styleable.RelativeTimeTextView_reference_time);
             mPrefix = a.getString(R.styleable.RelativeTimeTextView_relative_time_prefix);
             mSuffix = a.getString(R.styleable.RelativeTimeTextView_relative_time_suffix);
+            isHtmlTagsEnabled = a.getBoolean(R.styleable.RelativeTimeTextView_html_tags_enabled, false);
 
             mPrefix = mPrefix == null ? "" : mPrefix;
             mSuffix = mSuffix == null ? "" : mSuffix;
@@ -111,6 +112,26 @@ public class RelativeTimeTextView extends TextView {
     }
 
     /**
+     * Returns if html tags support is enabled
+     * @return
+     */
+    public boolean isHtmlTagsEnabled() {
+        return isHtmlTagsEnabled;
+    }
+
+    /**
+     * Boolean for enabling support of html formatting in
+     * prefix and suffix
+     * @param htmlTagsEnabled
+     *
+     * Example:
+     * in XX minutes [suffix]
+     */
+    public void setHtmlTagsEnabled(boolean htmlTagsEnabled) {
+        isHtmlTagsEnabled = htmlTagsEnabled;
+    }
+
+    /**
      * Sets the reference time for this view. At any moment, the view will render a relative time period relative to the time set here.
      * <p/>
      * This value can also be set with the XML attribute {@code reference_time}
@@ -147,7 +168,13 @@ public class RelativeTimeTextView extends TextView {
          */
         if (this.mReferenceTime == -1L)
             return;
-        setText(Html.fromHtml(mPrefix + getRelativeTimeDisplayString() + mSuffix));
+
+        String text = mPrefix + getRelativeTimeDisplayString() + mSuffix;
+        if (isHtmlTagsEnabled) {
+            setText(StringUtils.getHtmlFormattedString(text));
+        } else {
+            setText(text);
+        }
     }
 
     private CharSequence getRelativeTimeDisplayString() {

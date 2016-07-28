@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:paddingTop="@dimen/margin_primary"
     android:paddingBottom="@dimen/margin_primary">
 
@@ -16,6 +17,7 @@
         android:id="@+id/timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_primary" />
+        android:layout_marginTop="@dimen/margin_primary"
+        app:html_tags_enabled="true"/>
     
 </LinearLayout>

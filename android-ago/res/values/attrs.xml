@@ -4,5 +4,6 @@
         <attr name="relative_time_prefix" format="string" />
         <attr name="relative_time_suffix" format="string" />
         <attr name="reference_time" format="string" />
+        <attr name="html_tags_enabled" format="boolean" />
     </declare-styleable>
 </resources>
