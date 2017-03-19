@@ -13,10 +13,18 @@ Obtaining
 
 ###Gradle
 
+Add repo to your build.gradle
+
+    allprojects {
+    	repositories {
+    		maven { url "https://jitpack.io" }
+    	}
+    }
+
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.curioustechizen.android-ago:library:<LATEST_VERSION>'
+        compile 'com.github.pwiniars.android-ago:android-ago:1.0.0'
     }
 
 
@@ -32,6 +40,7 @@ Usage
   - Set the reference time either using `setReferenceTime` method or using the XML attribute `reference_time`.
   - Optionally, you can set a prefix using `relative_time_prefix` through XML or `setPrefix` from Java code.
   - Similarly, you can set a suffix using `relative_time_suffix` through XML or `setSuffix` from Java code.
+  - Optionally, you can enable Html tags support using `html_tags_enabled` through XML or `setHtmlTagsEnabled` from Java code.
 
 In your layout:
 ```xml
@@ -40,6 +49,7 @@ In your layout:
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:relative_time_prefix="Completed "
+    app:html_tags_enabled="true"
     android:layout_marginTop="@dimen/margin_primary" />
 ```
 

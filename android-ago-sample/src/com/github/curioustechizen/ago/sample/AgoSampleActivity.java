@@ -1,7 +1,5 @@
 package com.github.curioustechizen.ago.sample;
 
-import java.util.List;
-
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +11,8 @@ import android.widget.TextView;
 
 import com.github.curioustechizen.ago.RelativeTimeTextView;
 import com.github.curioustechizen.ago.sample.DummyContent.RowItem;
+
+import java.util.List;
 
 public class AgoSampleActivity extends ListActivity {
 
@@ -42,6 +42,9 @@ public class AgoSampleActivity extends ListActivity {
 			
 			tvMessage.setText(item.info);
 			tvTimestamp.setReferenceTime(item.timestamp);
+//			tvTimestamp.setHtmlTagsEnabled(true); - it's already set to true in "row_item.xml"
+			tvTimestamp.setPrefix("<font color=\"#FF0000\">Prefix </font>");
+			tvTimestamp.setSuffix("<font color=\"#3639FF\"> Suffix</font>");
 			return convertView;
 		}
 	}
