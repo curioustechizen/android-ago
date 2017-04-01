@@ -1,3 +1,10 @@
+v1.3.3 [Apr 2, 2017]
+========
+
+  - [CHANGE]: Bumped versions of compileSdkVersion, targetSdkVersion, Gradle, Android Gradle plugin and buildToolsVersion
+  - [TRANSLATIONS]: Spanish, Ukrainian, Norwegian, Arabic, Dutch, Romanian
+
+
 v1.3.2 [Jun 12, 2016]
 ========
 
@@ -24,8 +31,8 @@ v1.3.0 [Feb 14, 2014]
 v1.2.0 [Dec 16, 2014]
 ========
 
-  - [BUGFIX]:NPE seen when the RelativeTimeTextView has an initial visibility="gone"
-  - [BUGFIX]:RelativeTimeTextView does not show anything if the reference time was only set using the XML attribute reference_time
+  - [BUGFIX]: NPE seen when the RelativeTimeTextView has an initial visibility="gone"
+  - [BUGFIX]: RelativeTimeTextView does not show anything if the reference time was only set using the XML attribute reference_time
   - [MISC]: Updated gradle files to 1.0.0
 
 
