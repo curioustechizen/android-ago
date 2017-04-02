@@ -19,4 +19,4 @@ android {
     }
 }
 
-//apply from: 'maven-publish.gradle'
+apply from: 'maven-publish.gradle'
