@@ -14,9 +14,10 @@ This library can be seen as a wrapper on top of the excellent `android.text.form
 Add the following to your build.gradle
 
     dependencies {
-        compile 'com.github.curioustechizen.android-ago:library:1.3.3'
+        compile 'com.github.curioustechizen.android-ago:library:1.3.4'
     }
 
+**Important:** v1.3.4 Fixed a major bug (#47). If you are using an older version, please update to 1.3.4 now.
 
 ### Eclipse+ADT
   1. Clone the repo
