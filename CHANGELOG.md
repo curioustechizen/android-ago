@@ -1,26 +1,32 @@
-v1.3.3 [Apr 2, 2017]
-========
+## v1.3.4
+
+  - [FIX]: Issue [#47](https://github.com/curioustechizen/android-ago/issues/47)
+  - [TRANSLATIONS]: Correct translations for Dutch, added Danish
+
+
+## v1.3.3 [Apr 2, 2017]
+
 
   - [CHANGE]: Bumped versions of compileSdkVersion, targetSdkVersion, Gradle, Android Gradle plugin and buildToolsVersion
   - [TRANSLATIONS]: Spanish, Ukrainian, Norwegian, Arabic, Dutch, Romanian
 
 
-v1.3.2 [Jun 12, 2016]
-========
+## v1.3.2 [Jun 12, 2016]
+
 
   - [BUGFIX]: Fixed memory leak in `RelativeTimeTextView`
   - [TRANSLATIONS]: French, Portuguese
 
 
 
-v1.3.1 [May 15, 2016]
-========
+## v1.3.1 [May 15, 2016]
+
 
   - [TRANSLATIONS]: Hebrew, Russian, Chinese, Slovak, German
 
 
-v1.3.0 [Feb 14, 2014]
-========
+## v1.3.0 [Feb 14, 2014]
+
 
   - [CHANGE]: Set minSdk to 8
   - [CHANGE]: Cleaned up unnecessary resources
@@ -28,24 +34,24 @@ v1.3.0 [Feb 14, 2014]
   - [NEW]: Included tasks for publishing to Maven Central
 
 
-v1.2.0 [Dec 16, 2014]
-========
+## v1.2.0 [Dec 16, 2014]
+
 
   - [BUGFIX]: NPE seen when the RelativeTimeTextView has an initial visibility="gone"
   - [BUGFIX]: RelativeTimeTextView does not show anything if the reference time was only set using the XML attribute reference_time
   - [MISC]: Updated gradle files to 1.0.0
 
 
-v1.1.1 [Sep 2, 2014]
-========
+## v1.1.1 [Sep 2, 2014]
+
 
   - [FEATURE]: Added option to add prefix and suffix to the RelativeTimeTextView (Credit @xiprox )
   - [MISC]: Updated to recent versions of gradle, gradle plugin, build tools.
 
 
 
-v1.1.0 [Aug 21, 2014]
-========
+## v1.1.0 [Aug 21, 2014]
+
 
   - [FEATURE]: Added Gradle Support. (Credit to @intrications )
   - [BUGFIX]: #2

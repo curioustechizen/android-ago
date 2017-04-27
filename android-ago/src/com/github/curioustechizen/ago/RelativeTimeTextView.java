@@ -128,7 +128,7 @@ public class RelativeTimeTextView extends TextView {
         /*
          * Instantiate a new runnable with the new reference time
          */
-        mUpdateTimeTask = new UpdateTimeRunnable(this, mReferenceTime);
+        initUpdateTimeTask();
         
         /*
          * Start a new schedule.
@@ -186,8 +186,13 @@ public class RelativeTimeTextView extends TextView {
     }
 
     private void startTaskForPeriodicallyUpdatingRelativeTime() {
+        if(mUpdateTimeTask.isDetached()) initUpdateTimeTask();
         mHandler.post(mUpdateTimeTask);
         isUpdateTaskRunning = true;
+    }
+
+    private void initUpdateTimeTask() {
+        mUpdateTimeTask = new UpdateTimeRunnable(this, mReferenceTime);
     }
 
     private void stopTaskForPeriodicallyUpdatingRelativeTime() {
@@ -247,26 +252,30 @@ public class RelativeTimeTextView extends TextView {
             referenceTime = in.readLong();
         }
     }
-    
-    private static class UpdateTimeRunnable implements Runnable{
 
-    	private long mRefTime;
-        private final WeakReference<RelativeTimeTextView>  weakRefRttv;
-    	
-    	UpdateTimeRunnable(RelativeTimeTextView rttv, long refTime){
-    		this.mRefTime = refTime;
+    private static class UpdateTimeRunnable implements Runnable {
+
+        private long mRefTime;
+        private final WeakReference<RelativeTimeTextView> weakRefRttv;
+
+        UpdateTimeRunnable(RelativeTimeTextView rttv, long refTime) {
+            this.mRefTime = refTime;
             weakRefRttv = new WeakReference<>(rttv);
+        }
+
+        boolean isDetached() {
+            return weakRefRttv.get() == null;
         }
 
         void detach() {
             weakRefRttv.clear();
         }
 
-		@Override
-		public void run() {
+        @Override
+        public void run() {
             RelativeTimeTextView rttv = weakRefRttv.get();
-            if(rttv == null)   return;
-			long difference = Math.abs(System.currentTimeMillis() - mRefTime);
+            if (rttv == null) return;
+            long difference = Math.abs(System.currentTimeMillis() - mRefTime);
             long interval = INITIAL_UPDATE_INTERVAL;
             if (difference > DateUtils.WEEK_IN_MILLIS) {
                 interval = DateUtils.WEEK_IN_MILLIS;
@@ -277,7 +286,7 @@ public class RelativeTimeTextView extends TextView {
             }
             rttv.updateTextDisplay();
             rttv.mHandler.postDelayed(this, interval);
-			
-		}
+
+        }
     }
 }
