@@ -29,7 +29,7 @@ public class RelativeTimeTextView extends TextView {
     private String mText;
     private String mPrefix;
     private String mSuffix;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private UpdateTimeRunnable mUpdateTimeTask;
     private boolean isUpdateTaskRunning = false;
 
@@ -141,13 +141,40 @@ public class RelativeTimeTextView extends TextView {
         updateTextDisplay();
     }
 
+    @Override
+    public void setText(CharSequence text, BufferType type) {
+
+        /*
+         * Stop updating relative time when using simple setText method
+         */
+        stopTaskForPeriodicallyUpdatingRelativeTime();
+        super.setText(text, type);
+    }
+
+    /**
+     * Sets the text to this {@link TextView}. Using this method, updating relative time will be stopped.
+     * <p/>
+     * Purpose of this method it to use {@link RelativeTimeTextView} as a simple {@link TextView}. Need to be used with {@link String} param
+     * just becasue super method with {@link CharSequence} param is declared as final.
+     *
+     * @param text The {@link String} to be bind into this {@link TextView}
+     */
+    public void setText(String text) {
+
+        /*
+         * Stop updating relative time when using simple setText method
+         */
+        stopTaskForPeriodicallyUpdatingRelativeTime();
+        super.setText(text);
+    }
+
     private void updateTextDisplay() {
         /*
          * TODO: Validation, Better handling of negative cases
          */
         if (this.mReferenceTime == -1L)
             return;
-        setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
+        super.setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
     }
 
     private CharSequence getRelativeTimeDisplayString() {
