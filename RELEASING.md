@@ -6,3 +6,4 @@ This file is mainly for me to remember how to publish the library on Maven Centr
 4. Select the android-ago repository and Click "Close" button at the top.
 5. After a few minutes if you refresh the closed repo, you will see the "Release" and "Drop" buttons enabled. At this point, select "Release".
 6. After a few minutes you will no longer see the repo in Staging Repositories section. This means it has been released. To confirm, go to the "artifact-search" box and search for android-ago. Ensure that the latest version is available.
+7. It takes 10 minutes for the library to show up on the [Maven Central Repository](http://repo1.maven.org/maven2) and about 3 hours to show up on [Maven Search](https://search.maven.org/).
