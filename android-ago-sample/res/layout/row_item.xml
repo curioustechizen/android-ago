@@ -13,9 +13,22 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <com.github.curioustechizen.ago.RelativeTimeTextView
-        android:id="@+id/timestamp"
+        android:id="@+id/defaultrttv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_primary" />
-    
+
+    <com.github.curioustechizen.ago.sample.PrefixRttv
+        android:id="@+id/prefixrttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_primary"/>
+
+    <com.github.curioustechizen.ago.sample.FullyCustomRttv
+        android:id="@+id/customrttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_primary" />
+
+
 </LinearLayout>

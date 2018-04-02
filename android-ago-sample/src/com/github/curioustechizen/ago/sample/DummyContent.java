@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DummyContent {
+class DummyContent {
 	
 	private static final long NOW = new Date().getTime();
 	
-	public static class RowItem{
-		public String info;
-		public long timestamp;
+	static class RowItem{
+		String info;
+		long timestamp;
 		
 		RowItem(String info, long timestamp){
 			this.info = info;
@@ -18,7 +18,7 @@ public class DummyContent {
 		}
 	}
 	
-	public static final List<RowItem> DUMMY_ITEMS = new ArrayList<DummyContent.RowItem>(4);
+	static final List<RowItem> DUMMY_ITEMS = new ArrayList<>(4);
 	
 	static {
 		DUMMY_ITEMS.add(new RowItem("A message", NOW));

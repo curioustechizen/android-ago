@@ -5,4 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="format_prefix_custom_rttv">Updated %1$s</string>
+
+    <string name="fully_custom_rttv_future">Some day, in the distant future</string>
+    <string name="fully_custom_rttv_past">Once upon a time, long long ago</string>
+    <string name="fully_custom_rttv_now">Right NOW!</string>
 </resources>

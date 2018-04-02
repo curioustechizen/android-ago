@@ -10,7 +10,6 @@ import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import com.github.curioustechizen.ago.R;
 
 import java.lang.ref.WeakReference;
 
@@ -26,7 +25,6 @@ public class RelativeTimeTextView extends TextView {
     private static final long INITIAL_UPDATE_INTERVAL = DateUtils.MINUTE_IN_MILLIS;
 
     private long mReferenceTime;
-    private String mText;
     private String mPrefix;
     private String mSuffix;
     private Handler mHandler = new Handler();
@@ -46,8 +44,9 @@ public class RelativeTimeTextView extends TextView {
     private void init(Context context, AttributeSet attrs) {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.RelativeTimeTextView, 0, 0);
+        String referenceTimeText;
         try {
-            mText = a.getString(R.styleable.RelativeTimeTextView_reference_time);
+            referenceTimeText = a.getString(R.styleable.RelativeTimeTextView_reference_time);
             mPrefix = a.getString(R.styleable.RelativeTimeTextView_relative_time_prefix);
             mSuffix = a.getString(R.styleable.RelativeTimeTextView_relative_time_suffix);
 
@@ -58,7 +57,7 @@ public class RelativeTimeTextView extends TextView {
         }
 
         try {
-            mReferenceTime = Long.valueOf(mText);
+            mReferenceTime = Long.valueOf(referenceTimeText);
         } catch (NumberFormatException nfe) {
         	/*
         	 * TODO: Better exception handling
@@ -74,17 +73,22 @@ public class RelativeTimeTextView extends TextView {
      * Returns prefix
      * @return
      */
+    @Deprecated
     public String getPrefix() {
         return this.mPrefix;
     }
 
     /**
+     * @deprecated This method is not suitable for i18n.
+     * Instead, override {@link #getRelativeTimeDisplayString(long, long)}
+     * <p/>
      * String to be attached before the reference time
      * @param prefix
      *
      * Example:
      * [prefix] in XX minutes
      */
+    @Deprecated
     public void setPrefix(String prefix) {
         this.mPrefix = prefix;
         updateTextDisplay();
@@ -94,17 +98,23 @@ public class RelativeTimeTextView extends TextView {
      * Returns suffix
      * @return
      */
+    @Deprecated
     public String getSuffix() {
         return this.mSuffix;
     }
 
     /**
+     *
+     * @deprecated This method is not suitable for i18n.
+     * Instead, override {@link #getRelativeTimeDisplayString(long, long)}
+     * <p/>
      * String to be attached after the reference time
      * @param suffix
      *
      * Example:
      * in XX minutes [suffix]
      */
+    @Deprecated
     public void setSuffix(String suffix) {
         this.mSuffix = suffix;
         updateTextDisplay();
@@ -147,26 +157,32 @@ public class RelativeTimeTextView extends TextView {
          */
         if (this.mReferenceTime == -1L)
             return;
-        setText(mPrefix + getRelativeTimeDisplayString() + mSuffix);
+        setText(mPrefix + getRelativeTimeDisplayString(mReferenceTime, System.currentTimeMillis()) + mSuffix);
     }
 
-    private CharSequence getRelativeTimeDisplayString() {
-        long now = System.currentTimeMillis();
-        long difference = now - mReferenceTime; 
-        return (difference >= 0 &&  difference<=DateUtils.MINUTE_IN_MILLIS) ? 
-                getResources().getString(R.string.just_now): 
+    /**
+     * Get the text to display for relative time. By default, this calls {@link DateUtils#getRelativeTimeSpanString(long, long, long, int)} passing {@link DateUtils#FORMAT_ABBREV_RELATIVE} flag.
+     * <br/>
+     * You can override this method to customize the string returned. For example you could add prefixes or suffixes, or use Spans to style the string etc
+     * @param referenceTime The reference time passed in through {@link #setReferenceTime(long)} or through {@code reference_time} attribute
+     * @param now The current time
+     * @return The display text for the relative time
+     */
+    protected CharSequence getRelativeTimeDisplayString(long referenceTime, long now) {
+        long difference = now - referenceTime;
+        return (difference >= 0 &&  difference<=DateUtils.MINUTE_IN_MILLIS) ?
+                getResources().getString(R.string.just_now):
                 DateUtils.getRelativeTimeSpanString(
-                    mReferenceTime,
-                    now,
-                    DateUtils.MINUTE_IN_MILLIS,
-                    DateUtils.FORMAT_ABBREV_RELATIVE);
+                        mReferenceTime,
+                        now,
+                        DateUtils.MINUTE_IN_MILLIS,
+                        DateUtils.FORMAT_ABBREV_RELATIVE);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         startTaskForPeriodicallyUpdatingRelativeTime();
-
     }
 
     @Override

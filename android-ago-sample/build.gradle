@@ -5,11 +5,10 @@ repositories{
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 27
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 21
+        minSdkVersion 14
+        targetSdkVersion 27
     }
     sourceSets {
         main {
@@ -22,9 +21,9 @@ android {
 }
 
 dependencies {
-    //compile 'com.github.curioustechizen.android-ago:library:1.3.0'
-    compile project(':android-ago')
-    compile 'com.android.support:support-v4:21.0.3'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    implementation project(':android-ago')
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
 }

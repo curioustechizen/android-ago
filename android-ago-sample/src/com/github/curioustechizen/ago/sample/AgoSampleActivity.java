@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,21 +28,26 @@ public class AgoSampleActivity extends ListActivity {
 	}
 
 	private static class DummyAdapter extends ArrayAdapter<RowItem>{
-		public DummyAdapter(Context context, List<RowItem> items){
+		DummyAdapter(Context context, List<RowItem> items){
 			super(context, R.layout.row_item, items);
 		}
 		
+		@NonNull
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 			if(convertView == null){
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item, parent, false);
 			}
 			RowItem item = getItem(position);
-			TextView tvMessage = (TextView) convertView.findViewById(R.id.message);
-			RelativeTimeTextView tvTimestamp = (RelativeTimeTextView) convertView.findViewById(R.id.timestamp);
-			
+			TextView tvMessage = convertView.findViewById(R.id.message);
+			RelativeTimeTextView tvDefaultRttv = convertView.findViewById(R.id.defaultrttv);
+			RelativeTimeTextView tvPrefixRttv = convertView.findViewById(R.id.prefixrttv);
+			RelativeTimeTextView tvCustomRttv = convertView.findViewById(R.id.customrttv);
+
 			tvMessage.setText(item.info);
-			tvTimestamp.setReferenceTime(item.timestamp);
+			tvDefaultRttv.setReferenceTime(item.timestamp);
+			tvPrefixRttv.setReferenceTime(item.timestamp);
+			tvCustomRttv.setReferenceTime(item.timestamp);
 			return convertView;
 		}
 	}
