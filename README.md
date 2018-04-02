@@ -47,7 +47,6 @@ In your layout:
     android:id="@+id/timestamp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:relative_time_prefix="Completed "
     android:layout_marginTop="@dimen/margin_primary" />
 ```
 
@@ -145,6 +144,6 @@ See `android-ago-sample-databinding` for an example of how to use this library w
 	limitations under the License.
 
 
-  [1]: screenshots/android-ago-sample-screenshot.png "screenshot.png"
+  [1]: screenshots/android-ago-sample-screenshot_1.4.0.png "screenshot.png"
 
 
