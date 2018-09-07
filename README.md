@@ -98,9 +98,9 @@ class FullyCustomRttv extends RelativeTimeTextView {
     protected CharSequence getRelativeTimeDisplayString(long referenceTime, long now) {
         //Notice that we don't call super here.
         int resourceId = 0;
-        if(referenceTime == now) resourceId = R.id.now;
-        else if(referenceTime > now) resourceId = R.id.future;
-        else resourceId = past;
+        if(referenceTime == now) resourceId = R.string.now;
+        else if(referenceTime > now) resourceId = R.string.future;
+        else resourceId = R.string.past;
         
         return getResources().getString(resourceId);
     }    
