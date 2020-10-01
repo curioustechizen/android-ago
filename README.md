@@ -1,14 +1,14 @@
 # android-ago
 
-This library provides `RelativeTimeTextView`, a custom `TextView` that takes a reference time and always displays the relative time with respect to the reference point, **automatically refreshing the display text as needed**. This is a common pattern seen in several apps like chat apps, social networking, email etc.
+This library provides `RelativeTimeTextView`, a custom `TextView` that takes a reference time and always displays the relative time with respect to the reference point, **automatically refreshing the display text as needed**. This is a common pattern seen in several apps like chat apps, social networking, email, etc.
 
 ![Here is a screenshot from the sample app][1]
 
-This library can be seen as a wrapper on top of the excellent `android.text.format.DateUtils` class. Note that the library does _not_ expose all the options provided by the `DateUtils` class. I have left out many features because I couldn't decide what would be the best way to achieve the flexibility - dozens of XML attributes? Contributions in this regard are welcome.
+This library can be seen as a wrapper on top of the excellent `android.text.format.DateUtils` class. Note that the library does _not_ expose all the options provided by the `DateUtils` class. I have left out many features because I couldn't decide what would be the best way to achieve flexibility - dozens of XML attributes? Contributions in this regard are welcome.
 
 ## Why should I use this instead of DateUtils class?
 
-Because this library **automatically refreshes the display text as needed**. It internally uses `DateUtils` class.
+Because this library **automatically refreshes the display text as needed**. It internally uses the `DateUtils` class.
 
 Imagine you use `DateUtils` directly without using this library.
   - Imagine that it is **9 am** now. You set a reference time of **9:05 am**. Your TextView displays `in 5 mins`
@@ -29,7 +29,7 @@ Add the following to your build.gradle
         compile 'com.github.curioustechizen.android-ago:library:1.4.0'
     }
 
-**Important:** v1.3.4 Fixed a major bug (#47). If you are using an older version, please update to at least 1.3.4 now.
+**Important:** v1.3.4 Fixed a major bug (#47). If you are using an older version, please update it to at least 1.3.4 now.
 
 ### Eclipse+ADT
   1. Clone the repo
@@ -118,7 +118,7 @@ See [here](https://github.com/curioustechizen/android-ago/wiki/Apps-using-androi
 
 The library has been tested on API 11 and above. However, theoretically, it works on API 3 and above since all it uses is [DateUtils#getRelativeTimeSpanString](http://developer.android.com/reference/android/text/format/DateUtils.html#getRelativeTimeSpanString(long, long, long, int)).
 
-The minSdkVersion has been set to 8, however do not expect support from me for API version < 11.
+The minSdkVersion has been set to 8 however, do not expect support from me for API version < 11.
 
 
 # Usage with Data Binding
